@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Stress Journal</h1>
-    <h1>{% block title %}Yes{% endblock %}</h1>
-
+    <h1>{% block title %}Stress Journal{% endblock %}</h1>
+    <h2>Entries:</h2>
+    {% for post in posts %}
+        <a href="#">
+            <h2>{{ post['title'] }}</h2>
+        </a>
+        <p class="rating">Rating: {{ post['rating' ]}}</p>
+        <span class="time-stamp">{{ post['created'] }}</span>
+        <hr>
+    {% endfor %}
 {% endblock %}
