@@ -4,7 +4,7 @@
     <h1>{% block title %}Stress Journal{% endblock %}</h1>
     <h2>Entries:</h2>
     {% for post in posts %}
-        <a href="#">
+        <a href="{{ url_for('post', post_id=post['id']) }}">
             <h2>{{ post['title'] }}</h2>
         </a>
         <p class="rating">Rating: {{ post['rating' ]}}</p>
