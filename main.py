@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = 'not so secret'
 @app.route('/')
 def home():
     conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts').fetchall()
+    posts = conn.execute('SELECT * FROM posts ORDER BY created ASC').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
 
@@ -27,16 +27,17 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
+        rating = request.form['rating']
 
         if not title:
             flash('Title is required!')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                         (title, content))
+            conn.execute('INSERT INTO posts (title, rating, content) VALUES (?, ?, ?)',
+                         (title, rating, content))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
 
     return render_template('create.html')
 

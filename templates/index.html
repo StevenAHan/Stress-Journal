@@ -2,10 +2,11 @@
 
 {% block content %}
     <h1>{% block title %}Stress Journal{% endblock %}</h1>
-    <h2>Entries:</h2>
+    <h2>My Past Entries:</h2>
+    
     {% for post in posts %}
-        <a href="{{ url_for('post', post_id=post['id']) }}">
-            <h2>{{ post['title'] }}</h2>
+        <a class="title" href="{{ url_for('post', post_id=post['id']) }}">
+            <h2 class="title">{{ post['title'] }}</h2>
         </a>
         <p class="rating">Rating: {{ post['rating' ]}}</p>
         <span class="time-stamp">{{ post['created'] }}</span>

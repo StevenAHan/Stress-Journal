@@ -1,3 +1,18 @@
 .time-stamp {
-    color: "$pink-500";
+    color: rgb(242, 71, 99);
+    border: 2px;
+    border-color: rgb(242, 71, 99);
+    border-style: solid;
+    background-color: pink;
+    padding: 2px;
+    border-radius: 15px;
+}
+
+.title {
+    color: rgb(125, 125, 125);
+    text-decoration: none;
+  }
+
+.title :hover {
+    color: black;
 }
