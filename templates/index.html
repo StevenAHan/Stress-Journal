@@ -8,7 +8,10 @@
         <a class="title" href="{{ url_for('post', post_id=post['id']) }}">
             <h2 class="title">{{ post['title'] }}</h2>
         </a>
-        <p class="rating">Rating: {{ post['rating' ]}}</p>
+        <a  class="title" href="{{ url_for('edit', id=post['id']) }}">
+            <span class="title">Edit</span>
+        </a>
+        <p class="rating">Stress Level: {{ post['rating' ]}}</p>
         <span class="time-stamp">{{ post['created'] }}</span>
         <hr>
     {% endfor %}

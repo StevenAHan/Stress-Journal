@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = 'not so secret'
 @app.route('/')
 def home():
     conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts ORDER BY created ASC').fetchall()
+    posts = conn.execute('SELECT * FROM posts ORDER BY created DESC').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
 
@@ -53,6 +53,38 @@ def get_post(post_id):
 @app.route("/how-to-use")
 def instruction():
     return "WIP"
+
+@app.route('/<int:id>/edit', methods=('GET', 'POST'))
+def edit(id):
+    post = get_post(id)
+
+    if request.method == 'POST':
+        title = request.form['title']
+        rating = request.form['rating']
+        content = request.form['content']
+
+        if not title:
+            flash('Title is required!')
+        else:
+            conn = get_db_connection()
+            conn.execute('UPDATE posts SET title = ?, rating = ?, content = ?'
+                         ' WHERE id = ?',
+                         (title, rating, content, id))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('home'))
+
+    return render_template('edit.html', post=post)
+
+@app.route('/<int:id>/delete', methods=('POST',))
+def delete(id):
+    post = get_post(id)
+    conn = get_db_connection()
+    conn.execute('DELETE FROM posts WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('"{}" was successfully deleted!'.format(post['title']))
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(debug=True)
