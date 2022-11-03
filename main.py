@@ -52,7 +52,7 @@ def get_post(post_id):
 
 @app.route("/how-to-use")
 def instruction():
-    return "WIP"
+    return render_template("how_to_use.html")
 
 @app.route('/<int:id>/edit', methods=('GET', 'POST'))
 def edit(id):
