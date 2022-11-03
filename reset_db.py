@@ -9,7 +9,7 @@ with open('schema.sql') as f:
 cur = connection.cursor()
 
 cur.execute("INSERT INTO posts (title, rating, content) VALUES (?, ?, ?)",
-            ('Welcome to the Stress Journal!', 0, 'To create a post, click the New Post tab on the navigation bar. Have fun!')
+            ('Welcome to Your Stress Journal!', 0, 'To create a post, click the New Post tab on the navigation bar. Have fun!')
             )
 
 connection.commit()

@@ -50,5 +50,9 @@ def get_post(post_id):
         abort(404)
     return post
 
+@app.route("/how-to-use")
+def instruction():
+    return "WIP"
+
 if __name__ == "__main__":
     app.run(debug=True)
